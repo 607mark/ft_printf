@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:43:55 by mshabano          #+#    #+#             */
-/*   Updated: 2024/05/05 18:58:57 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/05/05 19:02:07 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int sum(int count, ...)
 
 int main()
 {
-	printf("sum %d\n", sum(4, 1, 2, 3));
+	printf("sum %d\n", sum(4, 1000,10,  2, 3));
 }
