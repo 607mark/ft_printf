@@ -6,13 +6,11 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:43:55 by mshabano          #+#    #+#             */
-/*   Updated: 2024/05/28 19:30:47 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:35:18 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
+#include "string.h"
 /*
 int sum(int count, ...)
 {
@@ -64,9 +62,13 @@ int main() {
 }
 */
 
+#include <stdlib.h>
+#include <stdio.h>
+
 int main()
 {
-    int result = printf("Sentence to know how many %d\n", 0x310);
+ 	int n;
 
-    printf("%d characters were written", result);
+	n = strcspn("lol", "olaf");
+	printf("%d\n", n);
 }
