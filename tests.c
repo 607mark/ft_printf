@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:43:55 by mshabano          #+#    #+#             */
-/*   Updated: 2024/05/30 21:35:18 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:12:07 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ int main() {
 
 #include <stdlib.h>
 #include <stdio.h>
-
+#include "ft_printf.h"
 int main()
 {
- 	int n;
-
-	n = strcspn("lol", "olaf");
-	printf("%d\n", n);
+	int n = ft_printf("lol%d", 9);
+	printf("\n%d", n);
 }
