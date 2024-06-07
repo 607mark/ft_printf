@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:17:33 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/02 19:57:25 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:44:28 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,58 @@
 
 int	print_f(const char **specifier, va_list args, int *printed)
 {
+	int	len;
+
+	len = 0;
 	if (**specifier == 'c')
-		*printed += write(1, &(char){(char)va_arg(args, int)}, 1);
-	if (**specifier == 's')
-		*printed += printf("%s", va_arg(args, char *));
-	if (**specifier == 'p')
-		*printed += printf("%p", va_arg(args, void *));
-	if (**specifier == 'd' || **specifier == 'i')
-		*printed += printf("%d", va_arg(args, int));
-	if (**specifier == 'u')
-		*printed += printf("%u", va_arg(args, unsigned int));
-	if (**specifier == 'x')
-		*printed += printf("%x", va_arg(args, unsigned int));
-	if (**specifier == 'X')
-		*printed += printf("%X", va_arg(args, unsigned int));
-	if (**specifier == '%')
-		*printed += write(1, "%", 1);
-	*specifier += *printed;
+		len += write(1, &(char){(char)va_arg(args, int)}, 1);
+	else if (**specifier == 's')
+		len += put_str(va_arg(args, char *), -1);
+	else if (**specifier == 'p')
+		len += put_ptr((unsigned long)va_arg(args, void *));
+	else if (**specifier == 'd' || **specifier == 'i')
+		len += put_int(va_arg(args, int));
+	else if (**specifier == 'u')
+		len += printf("%u", va_arg(args, unsigned int));
+	else if (**specifier == 'x' || **specifier == 'X')
+		len += put_hex(va_arg(args, unsigned int), **specifier);
+	else if (**specifier == '%')
+		len += write(1, "%", 1);
+	else
+		return (-1);
+
+	if (len < 0)
+		return (-1);
+	*printed += len;
+	(*specifier)++;
 	return (1);
 }
 
 int ft_printf(const char *s, ...)
 {
-	va_list args;
-	int printed;
-	const char formats[10] = "cspdiuxX%";
-	
-	va_start(args, s);
-	printed = 0;
-	while (*s)
-	{
-		if (ft_strchr(s, '%'))
-		{
-			printed += putstr(s, ft_strchr(s, '%') - s);
-			s = ft_strchr(s, '%') + 1;
-			if (ft_strchr(formats, *s) && (print_f(&s, args, &printed) == -1))
-				return (-1);
-			else 
-				s++;
-		}
-		else
-		{
-			printed += putstr(s, -1);
-			break;
-		}
-	}
-	return (printed);
+    va_list args;
+    int printed;
+    const char *formats = "cspdiuxX%";
+    char *next_format;
+
+    va_start(args, s);
+    printed = 0;
+    while (*s)
+    {
+        next_format = ft_strchr(s, '%');
+        if (next_format)
+        {
+            printed += put_str(s, next_format - s);
+            s = next_format + 1;
+            if (ft_strchr(formats, *s))
+				print_f(&s, args, &printed);
+        }
+        else
+        {
+            printed += put_str(s, -1);
+            break;
+        }
+    }
+    va_end(args);
+    return (printed);
 }

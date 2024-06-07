@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   format_specifier_funcs.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 19:18:19 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 17:07:45 by mshabano         ###   ########.fr       */
+/*   Created: 2024/06/07 16:48:56 by mshabano          #+#    #+#             */
+/*   Updated: 2024/06/07 17:44:22 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+#include "ft_printf.h"
+#include "stdio.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
+int put_ptr(unsigned long ptr)
+{
+	int ret_value;
 
-char	*ft_strchr(const char *s, int c);
-int	ft_toupper(int c);
-size_t	ft_strlen(const char *s);
-int put_str(const char *s, int len);
-int put_ptr(unsigned long int ptr);
-int ft_printf(const char *s, ...);
-int print_f(const char **specifier, va_list args, int *printed);
-#endif
+	ret_value = 0;
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	ret_value += 2;
+	ret_value += put_hex(ptr, 'x');
+	return (ret_value);
+}
+
+int put_hex(unsigned long n, char c)
+{
+}

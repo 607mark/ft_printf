@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:49:26 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/02 19:20:45 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:24:24 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-int putstr(const char *s, int len)
+int put_str(const char *s, int len)
 {
 	if (len == -1)
 		len = ft_strlen(s);
