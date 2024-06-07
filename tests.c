@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:43:55 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 18:29:10 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:43:13 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include "ft_printf.h"
 int main()
 {
-	char *p = 0;
-	int	n = ft_printf("%s%s%s%s", p, p, p, p);
-	printf("%d", n);
+	char *p = "lol";
+	int	n = ft_printf("%p", p);
+	printf("\n%d\n", n);
+	n = printf("%p", p);
+	printf("\n%d", n);
 }
