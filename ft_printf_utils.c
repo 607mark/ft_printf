@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:49:26 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 17:24:24 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:34:43 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ size_t	ft_strlen(const char *s)
 
 int put_str(const char *s, int len)
 {
+	if (!s)
+		return (write(1, "(null)", 6));
 	if (len == -1)
 		len = ft_strlen(s);
 	write (1, s, len);

@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:48:56 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 17:44:22 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:35:26 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int put_ptr(unsigned long ptr)
 	return (ret_value);
 }
 
-int put_hex(unsigned long n, char c)
+int put_hex(long long n, char c)
 {
+	return (1);
+}
+
+int put_int(int n)
+{
+	return (1);
 }
