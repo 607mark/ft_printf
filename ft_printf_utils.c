@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:49:26 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 18:34:43 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:41:10 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (c - 'a' + 'A');
-	return (c);
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	len;
@@ -49,6 +42,5 @@ int put_str(const char *s, int len)
 		return (write(1, "(null)", 6));
 	if (len == -1)
 		len = ft_strlen(s);
-	write (1, s, len);
-	return (len);
+	return (write (1, s, len));
 }

@@ -6,19 +6,22 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:18:19 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 21:33:02 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:27:35 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 #define FT_PRINTF_H
 
+#define HEX_UPP "0123456789ABCDEF"
+#define HEX_LOW "0123456789abcdef"
+#define FORMAT_SET "cspdiuxX%"
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
 char	*ft_strchr(const char *s, int c);
-int	ft_toupper(int c);
 size_t	ft_strlen(const char *s);
 int put_str(const char *s, int len);
 int put_ptr(unsigned long ptr);

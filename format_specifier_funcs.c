@@ -6,17 +6,16 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:48:56 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 21:41:44 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:41:08 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "stdio.h"
 
 int put_ptr(unsigned long ptr)
 {
 	int ret_value;
-	char *radix = "0123456789abcdef";
+	
 	ret_value = 0;
 	if (write(1, "0x", 2) == -1)
 		return (-1);
@@ -28,7 +27,7 @@ int put_ptr(unsigned long ptr)
 		return(ret_value + 1);
 	}
 	ret_value += put_hex(ptr / 16, 'x');
-	if (write(1, (radix + ptr % 16), 1) == -1)
+	if (write(1, &HEX_LOW[ptr % 16], 1) == -1)
 		return (-1);
 	ret_value++;
 	return (ret_value);
@@ -36,39 +35,55 @@ int put_ptr(unsigned long ptr)
 
 int put_hex(long long num, char c)
 {
-	int	shift;
-	int leading_zero;
-	int ret_value;
-	int digit;
-	char *radix = "0123456789abcdef";
+	int		ret_value;
+	char	hex_num[16];
+	int		i;
 	
 	ret_value = 0;
+	i = 15;
 	if (num == 0)
 		return (write (1, "0", 1));
-    shift = sizeof(long long) * 8 - 4;
-	leading_zero = 1;
-	if (num < 0)
+	else if (num < 0)
 	{
-		if (write(1, "-", 1 == -1))
+		if (write(1, "-", 1) == -1)
 			return (-1);
 		num = -num;
+		ret_value++;
 	}
-	while (shift >= 0)
+	while (num > 0)
 	{
-		digit = (num >> shift) & 0xF;
-		if (digit != 0 || !leading_zero)
-		{
-			if (write(1, (radix + digit), 1) == -1)
-					return (-1);
-			ret_value++;
-			leading_zero = 0;
-		}
-		shift -= 4;
+		if (c == 'x')
+			hex_num[i--] = HEX_LOW[num % 16];
+		else if (c == 'X')
+			hex_num[i--] = HEX_UPP[num % 16];
+		num /= 16;
 	}
-	return (ret_value);
+	if (put_str(&hex_num[i + 1], 15 - i) == -1)
+		return (-1);
+	return (ret_value + 15 - i);
 }
 
 int put_int(long long n)
 {
-	return (1);
+	char dec_num[19];
+	int i;
+	int ret_value;
+
+	i = 18;
+	if (n == 0)
+		return (write(1, "0", 1));
+	if (n < 0)
+	{
+		if (write (1, "-", 1) == -1)
+			return (-1);
+		n = -n;
+		ret_value++;
+	}	
+	while (n > 0)
+	{
+		dec_num[i--] = HEX_LOW[n % 10];
+		n /= 10;
+	}
+	ret_value += put_str(&dec_num[i + 1], 18 - i);
+	return (ret_value);
 }

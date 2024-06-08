@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:17:33 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/07 17:44:28 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:03:03 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int ft_printf(const char *s, ...)
 {
     va_list args;
     int printed;
-    const char *formats = "cspdiuxX%";
     char *next_format;
 
     va_start(args, s);
@@ -58,7 +57,7 @@ int ft_printf(const char *s, ...)
         {
             printed += put_str(s, next_format - s);
             s = next_format + 1;
-            if (ft_strchr(formats, *s))
+            if (ft_strchr(FORMAT_SET, *s))
 				print_f(&s, args, &printed);
         }
         else
