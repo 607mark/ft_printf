@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:44:41 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 20:45:33 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:26:59 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int main()
 {
-	int n = ft_printf("%u", 239483);
-	printf("%d", n);
+	char *p = "lol";
+	ft_printf("%p\n", p);
+	printf("%p", p);
 }

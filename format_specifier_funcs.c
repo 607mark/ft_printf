@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:48:56 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 20:41:08 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:25:35 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ int put_hex(long long num, char c)
 	i = 15;
 	if (num == 0)
 		return (write (1, "0", 1));
-	else if (num < 0)
-	{
-		if (write(1, "-", 1) == -1)
-			return (-1);
-		num = -num;
-		ret_value++;
-	}
 	while (num > 0)
 	{
 		if (c == 'x')
