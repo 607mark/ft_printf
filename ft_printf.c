@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:17:33 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 19:03:03 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:44:31 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	print_f(const char **specifier, va_list args, int *printed)
 	else if (**specifier == 'd' || **specifier == 'i')
 		len += put_int(va_arg(args, int));
 	else if (**specifier == 'u')
-		len += printf("%u", va_arg(args, unsigned int));
+		len += put_int(va_arg(args, unsigned int));
 	else if (**specifier == 'x' || **specifier == 'X')
 		len += put_hex(va_arg(args, unsigned int), **specifier);
 	else if (**specifier == '%')
