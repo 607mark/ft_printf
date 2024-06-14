@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:17:33 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 20:44:31 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:36:50 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int ft_printf(const char *s, ...)
 
     va_start(args, s);
     printed = 0;
-    while (*s)
+    while (*s && printed != -1)
     {
         next_format = ft_strchr(s, '%');
         if (next_format)
@@ -58,7 +58,7 @@ int ft_printf(const char *s, ...)
             printed += put_str(s, next_format - s);
             s = next_format + 1;
             if (ft_strchr(FORMAT_SET, *s))
-				print_f(&s, args, &printed);
+		print_f(&s, args, &printed);
         }
         else
         {
