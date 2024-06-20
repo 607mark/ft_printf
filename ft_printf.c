@@ -6,10 +6,9 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:17:33 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/20 18:37:18 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:45:00 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 #include <stdio.h>
 
