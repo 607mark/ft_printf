@@ -6,15 +6,15 @@
 #    By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 18:20:47 by mshabano          #+#    #+#              #
-#    Updated: 2024/06/20 18:30:59 by mshabano         ###   ########.fr        #
+#    Updated: 2024/06/20 19:28:52 by mshabano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = liftprintf.a
+NAME = libftprintf.a
 
 SRCS = ft_printf.c \
       ft_printf_utils.c \
-      format_secifier_funcs.c \
+      format_specifier_funcs.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -25,10 +25,10 @@ AR = ar rcs
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJ)
+	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c %< -o %@
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
