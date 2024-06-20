@@ -12,25 +12,24 @@
 
 #include "ft_printf.h"
 
-int put_ptr(unsigned long ptr)
+int	put_ptr(unsigned long ptr)
 {
-	int ret_value;
-	int tmp;
+	int	ret_value;
+	int	tmp;
 
 	tmp = 0;
 	ret_value = 0;
-	if (write(1, "0x", 2) == -1)
-		return (-1);
 	ret_value += 2;
 	if (!ptr)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		return(ret_value + 1);
-	}
-	tmp = put_hex(ptr / 16, 'x');
-	if (tmp == -1)
+		return ((write(1, "(nil)", 5)));
+	if (write(1, "0x", 2) == -1)
 		return (-1);
+	if (ptr > 15)
+	{
+		tmp = put_hex(ptr / 16, 'x');
+		if (tmp == -1)
+			return (-1);
+	}
 	ret_value += tmp;
 	if (write(1, &HEX_LOW[ptr % 16], 1) == -1)
 		return (-1);
@@ -38,12 +37,12 @@ int put_ptr(unsigned long ptr)
 	return (ret_value);
 }
 
-int put_hex(long long num, char c)
+int	put_hex(long long num, char c)
 {
-	int		ret_value;
-	char	hex_num[16];
 	int		i;
-	int tmp;
+	int		ret_value;
+	int		tmp;
+	char	hex_num[16];
 
 	tmp = 0;
 	ret_value = 0;
@@ -61,19 +60,15 @@ int put_hex(long long num, char c)
 	tmp = write(1, &hex_num[i + 1], 15 - i);
 	if (tmp == -1)
 		return (-1);
-	else 
-		ret_value += tmp;
-	return (ret_value);
+	return (ret_value + tmp);
 }
 
-int put_int(long long n)
+int	put_int(long long n)
 {
-	char dec_num[19];
-	int i;
-	int ret_value;
-	int tmp;
+	char	dec_num[19];
+	int		i;
+	int		ret_value;
 
-	tmp = 0;
 	ret_value = 0;
 	i = 18;
 	if (n == 0)
@@ -84,16 +79,13 @@ int put_int(long long n)
 			return (-1);
 		n = -n;
 		ret_value++;
-	}	
+	}
 	while (n > 0)
 	{
 		dec_num[i--] = HEX_LOW[n % 10];
 		n /= 10;
 	}
-	tmp = write(1, &dec_num[i + 1], 18 - i);
-	if (tmp  == -1)
+	if (write(1, &dec_num[i + 1], 18 - i) == -1)
 		return (-1);
-	else
-		ret_value += tmp;
-	return (ret_value);
+	return (ret_value + 18 - i);
 }

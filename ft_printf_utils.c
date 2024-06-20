@@ -36,19 +36,20 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-int put_str(const char *s, int len, int *printed)
+int	put_str(const char *s, int len, int *printed)
 {
-	int tmp;
+	int	tmp;
 
-	tmp  = 0;
-
+	tmp = 0;
 	if (!s)
-		tmp = (write(1, "(null)", 6));
-	else if (len == -1)
 	{
-		len = ft_strlen(s);
-		tmp = (write (1, s, len));
+		tmp = ((write(1, "(null)", 6)));
+		*printed += tmp;
+		return (tmp);
 	}
+	if (len == -1)
+		len = ft_strlen(s);
+	tmp = (write (1, s, len));
 	if (tmp == -1)
 		*printed = -1;
 	else

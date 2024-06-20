@@ -32,37 +32,39 @@ int	print_f(const char **specifier, va_list args, int *printed)
 	else if (**specifier == '%')
 		len = write(1, "%", 1);
 	else
-		return (-1);
+		len = 0;
 	if (len < 0)
 		return (-1);
-	*printed += len;
 	(*specifier)++;
+	*printed += len;
 	return (1);
 }
 
-int ft_printf(const char *s, ...)
+int	ft_printf(const char *s, ...)
 {
-    va_list args;
-    int printed;
-    char *next_format;
+	va_list	args;
+	int		printed;
+	int		tmp;
 
-    va_start(args, s);
-    printed = 0;
-    while (*s && printed != -1)
-    {
-        next_format = ft_strchr(s, '%');
-        if (next_format)
-        {
-            if(put_str(s, next_format - s, &printed) == -1)
-		    break;
-            s = next_format + 1;
-            if ((ft_strchr(FORMAT_SET, *s)) && print_f(&s, args, &printed) == -1)
-	    	break;
-        }
-        else
-            if (put_str(s, -1, &printed) == -1)
-		    break;
-    }
-    va_end(args);
-    return (printed);
+	va_start(args, s);
+	printed = 0;
+	while (*s && printed != -1)
+	{
+		tmp = 0;
+		if (ft_strchr(s, '%'))
+		{
+			if (put_str(s, ft_strchr(s, '%') - s, &printed) == -1)
+				break ;
+			s = ft_strchr(s, '%') + 1;
+			print_f(&s, args, &printed);
+		}
+		else
+		{
+			tmp = put_str(s, -1, &printed);
+			if (tmp != -1)
+				s += tmp;
+		}
+	}
+	va_end(args);
+	return (printed);
 }
