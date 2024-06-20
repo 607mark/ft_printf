@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:18:19 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 20:27:35 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:18:00 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
-int put_str(const char *s, int len);
+int put_str(const char *s, int len, int *printed);
 int put_ptr(unsigned long ptr);
 int put_hex(long long n, char c);
 int put_int(long long n);

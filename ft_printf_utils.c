@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:49:26 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 20:41:10 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:17:26 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-int put_str(const char *s, int len)
+int put_str(const char *s, int len, int *printed)
 {
+	int tmp;
+
+	tmp  = 0;
+
 	if (!s)
-		return (write(1, "(null)", 6));
-	if (len == -1)
+		tmp = (write(1, "(null)", 6));
+	else if (len == -1)
+	{
 		len = ft_strlen(s);
-	return (write (1, s, len));
+		tmp = (write (1, s, len));
+	}
+	if (tmp == -1)
+		*printed = -1;
+	else
+		*printed += tmp;
+	return (tmp);
 }

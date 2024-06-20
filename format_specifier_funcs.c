@@ -6,7 +6,7 @@
 /*   By: mshabano <mshabano@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:48:56 by mshabano          #+#    #+#             */
-/*   Updated: 2024/06/08 21:25:35 by mshabano         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:19:17 by mshabano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int put_ptr(unsigned long ptr)
 {
 	int ret_value;
-	
+	int tmp;
+
+	tmp = 0;
 	ret_value = 0;
 	if (write(1, "0x", 2) == -1)
 		return (-1);
@@ -26,7 +28,10 @@ int put_ptr(unsigned long ptr)
 			return (-1);
 		return(ret_value + 1);
 	}
-	ret_value += put_hex(ptr / 16, 'x');
+	tmp = put_hex(ptr / 16, 'x');
+	if (tmp == -1)
+		return (-1);
+	ret_value += tmp;
 	if (write(1, &HEX_LOW[ptr % 16], 1) == -1)
 		return (-1);
 	ret_value++;
@@ -38,7 +43,9 @@ int put_hex(long long num, char c)
 	int		ret_value;
 	char	hex_num[16];
 	int		i;
-	
+	int tmp;
+
+	tmp = 0;
 	ret_value = 0;
 	i = 15;
 	if (num == 0)
@@ -51,9 +58,12 @@ int put_hex(long long num, char c)
 			hex_num[i--] = HEX_UPP[num % 16];
 		num /= 16;
 	}
-	if (put_str(&hex_num[i + 1], 15 - i) == -1)
+	tmp = write(1, &hex_num[i + 1], 15 - i);
+	if (tmp == -1)
 		return (-1);
-	return (ret_value + 15 - i);
+	else 
+		ret_value += tmp;
+	return (ret_value);
 }
 
 int put_int(long long n)
@@ -61,7 +71,10 @@ int put_int(long long n)
 	char dec_num[19];
 	int i;
 	int ret_value;
+	int tmp;
 
+	tmp = 0;
+	ret_value = 0;
 	i = 18;
 	if (n == 0)
 		return (write(1, "0", 1));
@@ -77,6 +90,10 @@ int put_int(long long n)
 		dec_num[i--] = HEX_LOW[n % 10];
 		n /= 10;
 	}
-	ret_value += put_str(&dec_num[i + 1], 18 - i);
+	tmp = write(1, &dec_num[i + 1], 18 - i);
+	if (tmp  == -1)
+		return (-1);
+	else
+		ret_value += tmp;
 	return (ret_value);
 }
