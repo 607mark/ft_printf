@@ -31,8 +31,8 @@ int	print_f(const char **specifier, va_list args, int *printed)
 		len = put_hex(va_arg(args, unsigned int), **specifier);
 	else if (**specifier == '%')
 		len = write(1, "%", 1);
-	else
-		len = 0;
+	else if (**specifier == 0)
+		return (0);
 	if (len < 0)
 		return (-1);
 	(*specifier)++;
