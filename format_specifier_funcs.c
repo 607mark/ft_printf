@@ -17,9 +17,8 @@ int	put_ptr(unsigned long ptr)
 	int	ret_value;
 	int	tmp;
 
-	tmp = 0;
 	ret_value = 0;
-	ret_value += 2;
+	tmp = 0;
 	if (!ptr)
 		return ((write(1, "(nil)", 5)));
 	if (write(1, "0x", 2) == -1)
@@ -30,7 +29,7 @@ int	put_ptr(unsigned long ptr)
 		if (tmp == -1)
 			return (-1);
 	}
-	ret_value += tmp;
+	ret_value += tmp + 2;
 	if (write(1, &HEX_LOW[ptr % 16], 1) == -1)
 		return (-1);
 	ret_value++;

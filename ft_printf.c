@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
-#include <stdio.h>
 
-int	print_f(const char **specifier, va_list args, int *printed)
+void	print_format(const char **specifier, va_list args, int *printed)
 {
 	int	len;
 
@@ -32,38 +31,32 @@ int	print_f(const char **specifier, va_list args, int *printed)
 	else if (**specifier == '%')
 		len = write(1, "%", 1);
 	else if (**specifier == 0)
-		return (0);
+		return ;
 	if (len < 0)
-		return (-1);
+		*printed = -1;
+	else
+		*printed += len;
 	(*specifier)++;
-	*printed += len;
-	return (1);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
 	int		printed;
-	int		tmp;
 
 	va_start(args, s);
 	printed = 0;
 	while (*s && printed != -1)
 	{
-		tmp = 0;
 		if (ft_strchr(s, '%'))
 		{
 			if (put_str(s, ft_strchr(s, '%') - s, &printed) == -1)
 				break ;
 			s = ft_strchr(s, '%') + 1;
-			print_f(&s, args, &printed);
+			print_format(&s, args, &printed);
 		}
 		else
-		{
-			tmp = put_str(s, -1, &printed);
-			if (tmp != -1)
-				s += tmp;
-		}
+			s += put_str(s, -1, &printed);
 	}
 	va_end(args);
 	return (printed);
