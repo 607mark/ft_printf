@@ -31,7 +31,7 @@ void	print_format(const char **specifier, va_list args, int *printed)
 	else if (**specifier == '%')
 		len = write(1, "%", 1);
 	else if (**specifier == 0)
-		return ;
+		len = -1;
 	if (len < 0)
 		*printed = -1;
 	else
